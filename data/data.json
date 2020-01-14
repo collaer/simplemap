@@ -1,19 +1,19 @@
 {
-	'model': {
-		'title': {'name' : 'Nombre de empresa', 'type': 'text'}
-		,'description' : {'name' : 'Descripcion', 'type': 'text'}
-		,'p1' : {'name' : 'Nombre y apellido', 'type': 'text'}
-		,'p2' : {'name' : 'Email', 'type': 'mailto'}
-		,'p3' : {'name' : 'Type', 'type': 'text'}
-		,'p4' : {'name' : 'website', 'type': 'link'}
+	"model": {
+		"title": {"name" : "Nombre de empresa", "type": "text"}
+		,"description" : {"name" : "Descripcion", "type": "text"}
+		,"p1" : {"name" : "Nombre y apellido", "type": "text"}
+		,"p2" : {"name" : "Email", "type": "mailto"}
+		,"p3" : {"name" : "Type", "type": "text"}
+		,"p4" : {"name" : "website", "type": "link"}
 	}
-	'features': [
-		{'ISO_A3':'REG', 'title':'His Enterprise', 'description':'blablabla', 'p1':'John Doe', 'p2':'jdoe@website.com', 'p3':'SA', 'p4':'http://website.com' }
-		,{'ISO_A3':'ARG', 'title':'His Enterprise 2', 'description':'blablabla', 'p1':'John Doe', 'p2':'jdoe@website.com', 'p3':'SA', 'p4':'http://website.com' }
-		,{'ISO_A3':'URY', 'title':'His Enterprise 3', 'description':'blablabla', 'p1':'John Doe', 'p2':'jdoe@website.com', 'p3':'SA', 'p4':'http://website.com' }
-		,{'ISO_A3':'BOL', 'title':'His Enterprise 4', 'description':'blablabla', 'p1':'John Doe', 'p2':'jdoe@website.com', 'p3':'SA', 'p4':'http://website.com' }
-		,{'ISO_A3':'BOL', 'title':'His Enterprise 5', 'description':'blablabla', 'p1':'John Doe', 'p2':'jdoe@website.com', 'p3':'SA', 'p4':'http://website.com' }
-		,{'ISO_A3':'PER', 'title':'His Enterprise 4', 'description':'blablabla', 'p1':'John Doe', 'p2':'jdoe@website.com', 'p3':'SA', 'p4':'http://website.com' }
-		,{'ISO_A3':'PER', 'title':'His Enterprise 4', 'description':'blablabla', 'p1':'John Doe', 'p2':'jdoe@website.com', 'p3':'SA', 'p4':'http://website.com' }
+	,"features": [
+		{"ISO_A3":"REG", "title":"His Enterprise", "description":"blablabla", "p1":"John Doe", "p2":"jdoe@website.com", "p3":"SA", "p4":"http://website.com" }
+		,{"ISO_A3":"ARG", "title":"His Enterprise 2", "description":"blablabla", "p1":"John Doe", "p2":"jdoe@website.com", "p3":"SA", "p4":"http://website.com" }
+		,{"ISO_A3":"URY", "title":"His Enterprise 3", "description":"blablabla", "p1":"John Doe", "p2":"jdoe@website.com", "p3":"SA", "p4":"http://website.com" }
+		,{"ISO_A3":"BOL", "title":"His Enterprise 4", "description":"blablabla", "p1":"John Doe", "p2":"jdoe@website.com", "p3":"SA", "p4":"http://website.com" }
+		,{"ISO_A3":"BOL", "title":"His Enterprise 5", "description":"blablabla", "p1":"John Doe", "p2":"jdoe@website.com", "p3":"SA", "p4":"http://website.com" }
+		,{"ISO_A3":"PER", "title":"His Enterprise 4", "description":"blablabla", "p1":"John Doe", "p2":"jdoe@website.com", "p3":"SA", "p4":"http://website.com" }
+		,{"ISO_A3":"PER", "title":"His Enterprise 4", "description":"blablabla", "p1":"John Doe", "p2":"jdoe@website.com", "p3":"SA", "p4":"http://website.com" }
 	]
 }
