@@ -33,11 +33,81 @@ body {
     margin: 40px 0;
 }
 
+/*
+* These CSS rules affect the tooltips within maps with the custom-popup
+* class. See the full CSS for all customizable options:
+* https://github.com/mapbox/mapbox.js/blob/001754177f3985c0e6b4a26e3c869b0c66162c99/theme/style.css#L321-L366
+*/
+.custom-popup .leaflet-popup-content-wrapper {
+background:#2c3e50;
+color:#fff;
+font-size:11px;
+line-height:17px;
+max-height: 300px;
+width: 800px;
+overflow: auto;
+}
+
+.custom-popup .leaflet-popup-content-wrapper .custom-title {
+font-size:18px;
+line-height:28px;
+width: 700px;
+}
+.custom-popup .leaflet-popup-content-wrapper a {
+color:rgba(255,255,255,0.5);
+}
+.custom-popup .leaflet-popup-tip-container {
+width:30px;
+height:15px;
+}
+.custom-popup .leaflet-popup-tip {
+border-left:15px solid transparent;
+border-right:15px solid transparent;
+border-top:15px solid #2c3e50;
+background: #2c3e50;
+}
+
+.table-popup {
+	width: 740px;
+}
+
+.custom-popup .leaflet-popup-content-wrapper .table-success a {
+  color:rgba(0,0,0,0.5);
+}
+
+.custom-popup .leaflet-popup-content-wrapper .table-secondary a {
+  color:rgba(0,0,0,0.5);
+}
+.marker-cluster-small {
+	background-color: rgba(161, 206, 120, 0.5);
+	}
+.marker-cluster-small div {
+	background-color: rgba(100, 204, 47, 0.5);
+	}
+
+.marker-cluster-medium {
+	background-color: rgba(181, 226, 140, 0.6);
+	}
+.marker-cluster-medium div {
+	background-color: rgba(110, 204, 57, 0.6);
+	}
+
+.marker-cluster-large {
+	background-color: rgba(191, 246, 150, 0.7);
+	}
+.marker-cluster-large div {
+	background-color: rgba(120, 204, 67, 0.7);
+	}
+
 #button-wrapper {
 	position: absolute;
 	z-index: 1000;
 	top: 10px;
 	border: 0px;
+}
+
+.alert {
+  margin: 5px;
 }
 
 /* ---------------------------------------------------

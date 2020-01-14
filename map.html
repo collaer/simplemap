@@ -23,11 +23,13 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
-
+    <link rel="stylesheet" href="./lib/MarkerCluster.css" />
+  	<link rel="stylesheet" href="./lib/MarkerCluster.Default.css" />
   	<link rel="stylesheet" href="./map.css" />
 	
 
   	<script src="./lib/leaflet.markercluster-src.js"></script>
+	<script src="./lib/Leaflet.CheapLayerAt.js"></script>
 	
 	<link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
 
@@ -128,19 +130,13 @@
 					>
 						<thead>
 							<tr>
-								<th data-sortable="true" data-field="PROJECT_NUMBER"  data-formatter="linkProjectFormatter">Project</th>
-								<th data-sortable="true" data-field="OPERATION_NUMBER" data-formatter="linkProjectFormatter">Operation</th>
-								<th data-sortable="true" data-field="BALANCE_DATE">Date</th>
-								<th data-sortable="true" data-field="STATUS">Status</th>
-								<th data-sortable="true" data-field="PRODUCT_CD">Tipo</th>
-								<th data-sortable="true" data-field="CURRENT_APPROVED_AMNT_USEQ_DIC" data-formatter="moneyFormatter">Apprvd</th>
-								<th data-sortable="true" data-field="UNDISBURSED_AMNT_USEQ_DIC" data-formatter="moneyFormatter">Undisb.</th>
-								<th data-sortable="true" data-field="DISBURSED_AMNT_USEQ_DIC" data-formatter="moneyFormatter">Disbursed</th>
-								<th data-sortable="true" data-field="CANCELLED_AMNT_USEQ_DIC" data-formatter="moneyFormatter">Cancel</th>
-								<th data-sortable="true" data-field="BENEFICIARY_COUNTRY_ENGL_NM">Country</th>
-								<th data-sortable="true" data-field="REGION_CD">Region</th>
-								<th data-sortable="true" data-field="FOCUS_NM">MIF code</th>
-								<th data-sortable="true" data-field="SECTOR_ENGL_NM">Code sector</th>
+								<th data-sortable="true" data-field="ISO_A3">Country</th>
+								<th data-sortable="true" data-field="title">Title</th>
+								<th data-sortable="true" data-field="description">Description</th>
+								<th data-sortable="true" data-field="p1">P1</th>
+								<th data-sortable="true" data-field="p2">P1</th>
+								<th data-sortable="true" data-field="p3">P1</th>
+								<th data-sortable="true" data-field="p4">P1</th>
 							</tr>
 						</thead>
 					</table>

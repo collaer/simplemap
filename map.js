@@ -86,6 +86,24 @@ $(document).ready(function () {
 });
 
 
+var ISO_A3_list = [];
+var ISO_A3_27_LIST = [ 'ARG', 'BHS', 'BRB', 'BLZ', 'BOL', 'BRA', 'CHL', 'COL', 'CRI', 'DOM', 'ECU', 
+'SLV', 'GTM', 'GUY', 'HTI', 'HND', 'JAM', 'MEX', 'NIC', 'PAN', 'PRY', 'PER', 'REG', 'SUR', 'TTO', 'URY', 'VEN'];
+var ISO_A3_26_LIST = [ 'ARG', 'BHS', 'BRB', 'BLZ', 'BOL', 'BRA', 'CHL', 'COL', 'CRI', 'DOM', 'ECU', 
+'SLV', 'GTM', 'GUY', 'HTI', 'HND', 'JAM', 'MEX', 'NIC', 'PAN', 'PRY', 'PER', 'SUR', 'TTO', 'URY', 'VEN'];
+
+var countriesLayer;
+
+var Markers = L.markerClusterGroup({
+	chunkedLoading: true,
+	spiderfyOnMaxZoom: false,
+	showCoverageOnHover: false,
+	zoomToBoundsOnClick: false
+});
+
+var mydatatablejson;
+var markerOfOneIcon= new L.DivIcon({ html: '<div><span>1</span></div>', className: 'marker-cluster marker-cluster-small', iconSize: new L.Point(40, 40) });
+
 var DATA_JSON = (window.location.href.indexOf("file:")==-1 ?
 "./data/data.json"
 :
@@ -97,50 +115,43 @@ var COUTRIES_GEOJSON = (window.location.href.indexOf("file:")==-1 || true ?
 :
 "./DATA/countries2.geojson");
 
-var operations;
+var jsonData;
+
 
 $.getJSON(DATA_JSON).done(function(data) {
 		
-		console.log('done');
-		
 		data.features.forEach(function(f,i) { 
-			console.log(f);
+			//console.log(f);
 		});
 		
-		operations = data;
+		jsonData = data;
 		
-		loadCountryList(operations);
+		loadCountryList(jsonData);
 		loadCountriesLayer();
-		/*
-		operationsMarkers.on('clusterclick', function(clut) {
-
-			map.removeLayer(operationsMarkers);
+		
+		Markers.on('clusterclick', function(clut) {
+			map.removeLayer(Markers);
 
 			var getted = map.getLayerAt(map.latLngToContainerPoint(clut.latlng));
 			
-			//console.log(getted);
 			if (getted)
 				getted.openPopup();
 			
-			//Mhhhhh
+			//Tasty
 			setTimeout(function(){
-				map.addLayer(operationsMarkers);
+				map.addLayer(Markers);
 			},50);
-
-		});*/
+		});
 		
         countriesLayer.addTo(map);
-        //map.addLayer(operationsMarkers);
-		//L.control.layers(null, {'Numbers':operationsMarkers, 'Paises':countriesLayer}).addTo(map);	
-		//$('.custom-select').trigger('change');
+        map.addLayer(Markers);
+		L.control.layers(null, {'Numbers':Markers, 'Paises':countriesLayer}).addTo(map);	
+
 	});
 
 
-var ISO_A3_list = [];
-var countriesLayer;
-
-function loadCountryList(operations) {
-	$.each(operations.features, function( key, operation ) {
+function loadCountryList(jsonData) {
+	$.each(jsonData.features, function( key, operation ) {
 		if (!ISO_A3_list.includes(operation.ISO_A3)) {
 			ISO_A3_list.push(operation.ISO_A3);
 		}
@@ -148,40 +159,130 @@ function loadCountryList(operations) {
 };
 
 function loadCountriesLayer(){
-	countriesLayer = new L.GeoJSON.AJAX(COUTRIES_GEOJSON
-	,{
+	countriesLayer = new L.GeoJSON.AJAX(COUTRIES_GEOJSON,{
 		filter: function(feature, layer) {
-			return ISO_A3_list.includes(feature.properties.ISO_A3);
+			return ISO_A3_26_LIST.includes(feature.properties.ISO_A3);
 		}
-		/*,style: function(feature){
-			var counter = 0;
-			var fillColor;
-
-			$.each(operations.features, function( key, operation ) {
-				if (operation.ISO_A3 == feature.ISO_A3 && Filters.check(operation)) {
-					counter++;
-				};
-			});
-			
-			if ( counter - choroplethScaler.base >= 55*choroplethScaler.ratio ) fillColor = "#00441b";
-			else if ( counter - choroplethScaler.base >= 34*choroplethScaler.ratio ) fillColor = "#006d2c";
-			else if ( counter - choroplethScaler.base >= 21*choroplethScaler.ratio ) fillColor = "#238b45";
-			else if ( counter - choroplethScaler.base >= 13*choroplethScaler.ratio ) fillColor = "#41ab5d";
-			else if ( counter - choroplethScaler.base >= 8*choroplethScaler.ratio ) fillColor = "#74c476";
-			else if ( counter - choroplethScaler.base >= 5*choroplethScaler.ratio ) fillColor = "#a1d99b";
-			else if ( counter - choroplethScaler.base >= 3*choroplethScaler.ratio ) fillColor = "#c7e9c0";
-			else if ( counter - choroplethScaler.base >= 2*choroplethScaler.ratio ) fillColor = "#e5f5e0";
-			else if ( counter - choroplethScaler.base >= 1*choroplethScaler.ratio ) fillColor = "#f7fcf5";
-			else fillColor = "#f7f7f7";  // no data
-
-			return { color: "#999", weight: 1, fillColor: fillColor, fillOpacity: .79 };
-		}*/
+		,style: function(feature){
+			var fillColor = (ISO_A3_list.includes(feature.properties.ISO_A3) ? "#41ab5d" : "#c7e9c0");
+			return { color: "#999", weight: 1, fillColor: fillColor, fillOpacity: .69 };
+		}
 	}).on('data:loaded', function() {
-		//joinData();
+		joinData();
 	});
 };
 
-/*
+var ISO_A3_FILTER;
 function countryFilter(feature, layer) {
   if (feature.ISO_A3 === ISO_A3_FILTER) return true;
-};*/
+};
+
+var FilteredData;
+
+function sortByCountry(a,b) {
+	if (a.ISO_A3 === null) a.ISO_A3 = "";
+	if (b.ISO_A3 === null) b.ISO_A3 = "";
+    return (a.ISO_A3.toUpperCase() < b.ISO_A3.toUpperCase()) ? -1 : ((a.ISO_A3.toUpperCase() > b.ISO_A3.toUpperCase()) ? 1 : 0);
+};
+
+function getFilteredData() {
+	/*var FilteredData = {
+		"type": "FeatureCollection",
+		"name": "Operations filtered",
+		"features": []
+	};
+	$.each(operations.features, function(key, operation ) {
+		if (Filters.check(operation.properties) )
+		{
+			operation.key = key;
+			FilteredData.features.push(operation);
+		}
+	});
+	
+	FilteredData.features = FilteredData.features.sort(sortByCountry);
+	*/
+	
+	return jsonData.features.sort(sortByCountry);
+};
+
+
+function joinData() {
+	
+	//**CLEANING STUFFF***
+	mydatatablejson=[];
+	Markers.clearLayers();
+	
+	FilteredData = getFilteredData();
+	
+	mydatatablejson = jsonData.features;
+	var totalCounter = 0;
+	countriesLayer.eachLayer(function(feature){
+		
+		ISO_A3_FILTER = feature.feature.properties.ISO_A3;
+		
+		var countriesOperationsFeatures = FilteredData.filter(countryFilter);
+		var counter = 0;
+		
+		var popupTableContent = '';
+		
+		$.each(countriesOperationsFeatures, function(key, data ) {
+
+			var title = data.title;
+
+			var marker = L.marker(new L.LatLng(feature.getBounds().getCenter().lat, feature.getBounds().getCenter().lng), 
+			  { title: title, icon: markerOfOneIcon });
+
+			Markers.addLayer(marker);
+
+			//********************************POPUP TABLE CONTENT********************
+			counter++;
+			styleFocus = '';
+			
+			popupTableContent += '\n'+
+			'<tr>\n'+
+			'<th scope="row">' + data.title + '</th>\n'+
+			'<td>' + data.description + '</td>\n'+
+			'<td>' + data.p1 + '</td>\n'+
+			'<td>' + data.p2 + '</td>\n'+
+			'<td>' + data.p3 + '</td>\n'+
+			'<td>' + data.p4 + '</td>\n'+
+			'</tr>';
+
+		});
+
+		popupTableContent = '<div>' + feature.feature.properties.ADMIN + ' : total ' + counter +'</div>\n'+
+          '<table class="table table-striped table-dark table-popup" id="custom-table-id">\n'+
+            '<thead>\n'+
+              '<tr>\n'+
+                '<th scope="col">title</th>\n'+
+                '<th scope="col">info</th>\n'+
+                '<th scope="col">p1</th>\n'+
+                '<th scope="col">p1</th>\n'+
+                '<th scope="col">p2</th>\n'+
+                '<th scope="col">p3</th>\n'+
+                '<th scope="col">p4</th>\n'+
+              '</tr>\n'+
+            '</thead>\n'+
+            '<tbody>\n'+
+        
+		popupTableContent + '\n</tbody>\n</table>';
+		
+		feature.bindPopup(popupTableContent);
+		
+		totalCounter =+ counter;
+
+	});
+	
+	//**CLOSING STUFFF***
+	$('#loadedAlert').show();
+	
+	$('#loadedMsg')[0].innerHTML = "A total of " + totalCounter + " IDB Lab operations were loaded.";
+	
+	setTimeout(function(){
+			$('#loadedAlert').fadeOut();
+	}, 3500);
+	
+	if (Markers.getLayers().length > 0)
+		map.flyToBounds(Markers.getBounds(), {maxZoom:6});
+	
+};
