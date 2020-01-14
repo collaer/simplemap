@@ -1,0 +1,147 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+html, body, #map {
+	height: 100%;
+	width: 100%;
+}
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+#button-wrapper {
+	position: absolute;
+	z-index: 1000;
+	top: 10px;
+	border: 0px;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    width: 380px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #fff;
+    color: #7386D5;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -380px;
+}
+
+#sidebar .sidebar-header {
+    padding: 10px;
+    background: #fff;
+	color: #7386D5;
+}
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: calc(100% - 380px);
+    padding: 0px;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+	height: calc(100% - 400px);
+	border: 1px solid black;
+}
+
+#content.active {
+    width: 100%;
+}
+
+#content.activeHeight {
+    height: 100%;
+}
+
+#downbar.activeHeight {
+	display: none;
+}
+
+#downbar {
+    width: 100%;
+    position: relative;
+    height: 400px;
+    z-index: 999;
+    background: #fff;
+    color: #7386D5;
+    transition: all 0.3s;
+}
+
+.card-graph-header {
+	display: flex;
+	padding: 2px;
+	padding-top:4px;
+}
+
+.btn-remove-filters {
+	padding:0px;
+	height:30px;
+}
+
+.card-graph-body {
+	padding: 0px;
+	border: 1px;
+}
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -380px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #content {
+        width: 100%;
+    }
+    #content.active {
+        width: calc(100% - 380px);
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
