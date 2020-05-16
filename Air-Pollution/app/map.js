@@ -87,10 +87,10 @@ $(document).ready(function () {
         $("#wind").val(), $("#DEW").val(), $("#SKY").val(), $("#ATM").val()]
       polluted = myDecisionTreeClassifier.predict(feature);
       contenHTML = contenHTML + "<li>At position (Lat " + popLocation.lat + ', Lng '  + popLocation.lng +  ")</li>";
-      contenHTML = contenHTML + "<li>For tomorrow (day number "+dayoftheweek+" in the week and " + day_numb +  " in the year) at 4 PM</li>";
+      contenHTML = contenHTML + "<li>For tomorrow (day number "+dayoftheweek+" in the week and " + day_numb +  " in the year) at " + hour24 + " H24</li>";
       contenHTML = contenHTML + "<li>With standard weather paramaters NOT PREDICTED (@todo use weather API) </li>";
       contenHTML = contenHTML + "</ul>";
-      contenHTML = contenHTML + "<h3>Tomorrow at 4pm here, air Quality will be <b>" + (polluted ? ' Not Good':'Good') + "</b> [using EAP AQI taxonomy and model with 0.5 recall <a href='https://github.com/georgetown-analytics/Air-Pollution'>here</a>]</dh3>";
+      contenHTML = contenHTML + "<h3>Tomorrow at " + hour24 + " H24 here, air Quality will be <b>" + (polluted ? ' Not Good':'Good') + "</b> [using EAP AQI taxonomy and model with 0.5 recall <a href='https://github.com/georgetown-analytics/Air-Pollution'>here</a>]</dh3>";
       var popup = L.popup({
         maxWidth: "auto"
       })
