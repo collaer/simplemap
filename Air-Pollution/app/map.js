@@ -83,8 +83,15 @@ $(document).ready(function () {
       var sin_year = Math.sin(2*Math.PI*day_numb/365);
 
       var feature = [popLocation.lat, popLocation.lng, dayoftheweek,
-        sinday, cosday, sin_year, cos_year, $("#temp").val(), $("#cos_wind").val(), $("#sin_wind").val(),
-        $("#wind").val(), $("#DEW").val(), $("#SKY").val(), $("#ATM").val()]
+        sinday, cosday, sin_year, cos_year,
+        parseFloat($("#temp").val()),
+        parseFloat($("#cos_wind").val()),
+        parseFloat($("#sin_wind").val()),
+        parseFloat($("#wind").val()),
+        parseFloat($("#DEW").val()),
+        parseFloat($("#SKY").val()),
+        parseFloat($("#ATM").val())]
+        console.log(feature)
       polluted = myDecisionTreeClassifier.predict(feature);
       contenHTML = contenHTML + "<li>At position (Lat " + popLocation.lat + ', Lng '  + popLocation.lng +  ")</li>";
       contenHTML = contenHTML + "<li>For tomorrow (day number "+dayoftheweek+" in the week and " + day_numb +  " in the year) at " + hour24 + " H24</li>";
